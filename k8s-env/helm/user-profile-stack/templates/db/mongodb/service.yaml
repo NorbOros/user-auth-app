@@ -1,0 +1,20 @@
+# Mongodb Service YAML defines a Kubernetes Service to expose the MongoDB deployment within the cluster.
+# It uses a ClusterIP type, which means it will be accessible only within the cluster. 
+# The service listens on port 27017, which is the default port for MongoDB, 
+# and forwards traffic to the same port on the MongoDB pods selected by the label "app: mongodb"
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  
+  selector:
+    app: mongodb
+
+  ports:
+    - port: 27017
+      targetPort: 27017
+
+  

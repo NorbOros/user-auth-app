@@ -1,0 +1,15 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: user-profile
+  threads:
+    virtual:
+      enabled: true
+  data:
+    mongodb:
+      auto-index-creation: true
+  mongodb:
+    authentication-database: admin
+    uri: ${SPRING_MONGODB_URI:mongodb://admin:password@localhost:27017/user-profiles?authSource=admin}

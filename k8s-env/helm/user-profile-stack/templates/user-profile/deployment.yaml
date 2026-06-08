@@ -1,0 +1,34 @@
+#  spring-boot YAML defines a Kubernetes Deployment for running a MongoDB instance.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-profile-service
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-profile-service
+  template:
+    metadata:
+      labels:
+        app: user-profile-service
+    spec:
+      containers:
+        - name: user-profile-service
+          image: {{ .Values.userProfileService.image }}
+          ports:
+            - containerPort: {{ .Values.userProfileService.port }}
+          env:
+            - name: SPRING_MONGODB_URI
+              value: mongodb://{{ .Values.mongodb.username }}:$(MONGO_INITDB_ROOT_PASSWORD)@mongodb:{{ .Values.mongodb.port }}/{{ .Values.mongodb.database }}?authSource=admin
+          envFrom:
+            - secretRef:
+                name: mongodb-secret
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

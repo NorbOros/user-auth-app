@@ -1,0 +1,19 @@
+# Holds the default configuration values for a Helm chart.
+# It is used to provide settings that chart templates read at install/upgrade time, 
+# such as image tags, service ports, replica counts, and environment-specific overrides.
+namespace: user-profiles
+
+mongodb:
+  image: mongo:7
+  port: 27017
+  username: admin
+  password: password
+  database: user-profiles
+
+userProfileService:
+  image: user-profile-service:latest
+  port: 9001
+
+ingress:
+  className: nginx
+  userProfileServiceHost: user-service.local

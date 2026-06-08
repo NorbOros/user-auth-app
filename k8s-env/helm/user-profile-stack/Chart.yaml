@@ -1,0 +1,9 @@
+# Chart.yaml defines the Helm chart metadata
+# It contains chart name, version, description, app version, 
+# and chart dependencies used by Helm to identify and package the chart.
+apiVersion: v2
+name: user-profile-stack
+description: Minimal Spring Boot + MongoDB
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
